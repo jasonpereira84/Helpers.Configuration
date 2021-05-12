@@ -33,6 +33,13 @@ namespace JasonPereira84.Helpers
                 => FromJsonFile<ConfigurationBuilder>(args.Path, args.Optional);
             public static IConfigurationBuilder ToConfigurationBuilder(this String path)
                 => FromJsonFile<ConfigurationBuilder>(path);
+
+            public static IConfigurationBuilder AddCompilationProperties(this IConfigurationBuilder configurationBuilder, CompilationPropertiesConfigurationSource compilationPropertiesConfigurationSource)
+                => configurationBuilder.Add(compilationPropertiesConfigurationSource);
+
+            public static IConfigurationBuilder AddCompilationProperties(this IConfigurationBuilder configurationBuilder, CompilationProperties initialData)
+                => AddCompilationProperties(configurationBuilder, new CompilationPropertiesConfigurationSource(initialData));
+
         }
     }
 }

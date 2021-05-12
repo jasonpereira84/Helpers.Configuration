@@ -11,8 +11,6 @@ namespace JasonPereira84.Helpers
     {
         using Microsoft.Extensions.Configuration;
 
-        using Dictionary = Dictionary<String, List<String>>;
-
         public static partial class Configuration
         {
             public static (String Value, String Provider) GetValueAndProvider(this IConfigurationRoot configurationRoot, String key)
@@ -24,7 +22,7 @@ namespace JasonPereira84.Helpers
                 return (null, null);
             }
 
-            public static Dictionary ToDictionary(this IConfigurationRoot configurationRoot)
+            public static Dictionary<String, String> ToDictionary(this IConfigurationRoot configurationRoot)
             {
                 String _sanitize(String value)
                 {
@@ -36,7 +34,7 @@ namespace JasonPereira84.Helpers
                         .Replace("\"", "`");
                 }
 
-                Dictionary _recurseChildren(Dictionary dictionary, IEnumerable<IConfigurationSection> children)
+                Dictionary<String, List<String>> _recurseChildren(Dictionary<String, List<String>> dictionary, IEnumerable<IConfigurationSection> children)
                 {
                     foreach (var child in children)
                     {
@@ -55,8 +53,40 @@ namespace JasonPereira84.Helpers
                     }
                     return dictionary;
                 }
+                var providerSets = _recurseChildren(new Dictionary<String, List<String>>(), configurationRoot.GetChildren());
 
-                return _recurseChildren(new Dictionary(), configurationRoot.GetChildren());
+                (IEnumerable<String> PathNodes, String Value) _split(String @string)
+                {
+                    var delimiterIndex = @string.IndexOf('=');
+                    return (@string.Substring(0, delimiterIndex).Split(new Char[] { ':' }, StringSplitOptions.RemoveEmptyEntries), @string.Substring(delimiterIndex));
+                }
+
+                (IEnumerable<String> PathNodes, String Value) _extract(String pathNode, (IEnumerable<String> PathNodes, String Value) pathNodeHierarchy)
+                {
+                    if (pathNodeHierarchy.PathNodes.Count().GreaterThan(1) && pathNodeHierarchy.PathNodes.First().Matches(pathNode))
+                        return (pathNodeHierarchy.PathNodes.Skip(1), pathNodeHierarchy.Value);
+
+                    return pathNodeHierarchy;
+                }
+
+                var retVal = new Dictionary<String, String>();
+                foreach (var providerSet in providerSets)
+                {
+                    var pathNodeHierarchies = providerSet.Value
+                        .Select(@string =>
+                        {
+                            var parts = _split(@string);
+                            return new
+                            {
+                                PathNodeCount = parts.PathNodes.Count(),
+                                Tuple = parts
+                            };
+                        })
+                        .OrderBy(a => a.PathNodeCount);
+
+
+                }
+                return retVal;
             }
 
             public static T GetValue<T>(this IConfiguration configuration, String key, out T value)
