@@ -36,7 +36,6 @@ namespace JasonPereira84.Helpers
 
             public static IConfigurationBuilder AddCompilationProperties(this IConfigurationBuilder configurationBuilder, CompilationPropertiesConfigurationSource compilationPropertiesConfigurationSource)
                 => configurationBuilder.Add(compilationPropertiesConfigurationSource);
-
             public static IConfigurationBuilder AddCompilationProperties(this IConfigurationBuilder configurationBuilder, CompilationProperties initialData)
                 => AddCompilationProperties(configurationBuilder, new CompilationPropertiesConfigurationSource(initialData));
 
