@@ -43,8 +43,4 @@
     <PackageReference Include="JasonPereira84.Helpers.Misc" Version="3.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="AWS\" />
-  </ItemGroup>
-
 </Project>
