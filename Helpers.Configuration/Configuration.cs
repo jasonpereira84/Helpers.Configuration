@@ -106,6 +106,16 @@ namespace JasonPereira84.Helpers
             public static IEnumerable<T> GetObjects<T>(this IConfiguration configuration, String key, out IEnumerable<T> objs)
                 where T : class, new()
                 => objs = GetObjects<T>(configuration, key);
+
+            public static IEnumerable<String> GetStrings(this IConfiguration configuration, String key, Func<IConfigurationSection, String> selector)
+                => configuration.GetSection(key).GetChildren().Select(selector);
+            public static IEnumerable<String> GetStrings(this IConfiguration configuration, String key, Func<IConfigurationSection, String> selector, out IEnumerable<String> strings)
+                => strings = GetStrings(configuration, key, selector);
+
+            public static IEnumerable<String> GetStrings(this IConfiguration configuration, String key)
+                => GetStrings(configuration, key, child => child.Value);
+            public static IEnumerable<String> GetStrings(this IConfiguration configuration, String key, out IEnumerable<String> strings)
+                => strings = GetStrings(configuration, key);
         }
     }
 }
