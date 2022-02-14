@@ -71,11 +71,11 @@ namespace JasonPereira84.Helpers.Configuration.Tests
 
                     Assert.IsTrue(provider.Count() == 3);
                     Assert.IsTrue(data.ContainsKey(nameof(CompilationProperties.GIT_BRANCH)));
-                    Assert.IsTrue(data[nameof(CompilationProperties.GIT_BRANCH)].Equals("Unknown"));
+                    Assert.IsTrue(data[nameof(CompilationProperties.GIT_BRANCH)].Equals("?"));
                     Assert.IsTrue(data.ContainsKey(nameof(CompilationProperties.GIT_COMMIT)));
-                    Assert.IsTrue(data[nameof(CompilationProperties.GIT_COMMIT)].Equals("Unknown"));
+                    Assert.IsTrue(data[nameof(CompilationProperties.GIT_COMMIT)].Equals("?"));
                     Assert.IsTrue(data.ContainsKey(nameof(CompilationProperties.BUILD_CONFIGURATION)));
-                    Assert.IsTrue(data[nameof(CompilationProperties.BUILD_CONFIGURATION)].Equals("Unknown"));
+                    Assert.IsTrue(data[nameof(CompilationProperties.BUILD_CONFIGURATION)].Equals("?"));
                 }
 
                 {
@@ -89,7 +89,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                     provider.Load();
 
                     Assert.AreEqual(
-                        expected: "Unknown",
+                        expected: "?",
                         actual: _gitBranch());
 
                     provider.Set(nameof(CompilationProperties.GIT_BRANCH), "1");
@@ -99,7 +99,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
 
                     provider.Load();
                     Assert.AreEqual(
-                        expected: "Unknown",
+                        expected: "?",
                         actual: _gitBranch());
                 }
 
