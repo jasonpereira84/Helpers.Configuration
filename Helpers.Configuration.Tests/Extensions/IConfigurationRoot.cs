@@ -38,7 +38,9 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                     {
                         var list = dictionary[nameof(SomeConfigurationProvider)];
                         foreach (var pair in data)
+#pragma warning disable MSTEST0037
                             Assert.IsTrue(list.Contains($"{pair.Key}={pair.Value}"));
+#pragma warning restore MSTEST0037
                     }
 
                 }
@@ -72,15 +74,19 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                     Assert.IsNotNull(dictionary[nameof(SomeConfigurationProvider)]);
                     {
                         var list = dictionary[nameof(SomeConfigurationProvider)];
+#pragma warning disable MSTEST0037
                         foreach (var pair in data1)
                             Assert.IsTrue(list.Contains($"{pair.Key}={pair.Value}"));
+#pragma warning restore MSTEST0037
                     }
                     Assert.IsTrue(dictionary.ContainsKey(nameof(OtherConfigurationProvider)));
                     Assert.IsNotNull(dictionary[nameof(OtherConfigurationProvider)]);
                     {
                         var list = dictionary[nameof(OtherConfigurationProvider)];
+#pragma warning disable MSTEST0037
                         foreach (var pair in data2)
                             Assert.IsTrue(list.Contains($"{pair.Key}={pair.Value}"));
+#pragma warning restore MSTEST0037
                     }
 
                 }
@@ -118,15 +124,19 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                     Assert.IsNotNull(dictionary[nameof(SomeConfigurationProvider)]);
                     {
                         var list = dictionary[nameof(SomeConfigurationProvider)];
+#pragma warning disable MSTEST0037
                         foreach (var pair in data1.Where(x => !x.Key.Equals("key")))
                             Assert.IsTrue(list.Contains($"{pair.Key}={pair.Value}"));
+#pragma warning restore MSTEST0037
                     }
                     Assert.IsTrue(dictionary.ContainsKey(nameof(OtherConfigurationProvider)));
                     Assert.IsNotNull(dictionary[nameof(OtherConfigurationProvider)]);
                     {
                         var list = dictionary[nameof(OtherConfigurationProvider)];
+#pragma warning disable MSTEST0037
                         foreach (var pair in data2)
                             Assert.IsTrue(list.Contains($"{pair.Key}={pair.Value}"));
+#pragma warning restore MSTEST0037
                     }
 
                 }

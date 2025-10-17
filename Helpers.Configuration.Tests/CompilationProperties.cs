@@ -27,7 +27,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                 {
                     var compilationProperties = default(CompilationProperties);
 
-                    Assert.ThrowsException<ArgumentNullException>(
+                    Assert.Throws<ArgumentNullException>(
                         () => new CompilationPropertiesConfigurationSource(compilationProperties));
                 }
             }
@@ -53,7 +53,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                 {
                     var source = default(CompilationPropertiesConfigurationSource);
 
-                    Assert.ThrowsException<ArgumentNullException>(
+                    Assert.Throws<ArgumentNullException>(
                         () => new CompilationPropertiesConfigurationProvider(source));
                 }
             }
@@ -64,12 +64,12 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                     var source = new CompilationPropertiesConfigurationSource(compilationProperties);
                     var provider = new CompilationPropertiesConfigurationProvider(source);
 
-                    Assert.IsTrue(provider.Count() == 0);
+                    Assert.AreEqual(expected: 0, actual: provider.Count());
 
                     provider.Load();
                     var data = provider.ToDictionary(x => x.Key, x => x.Value);
 
-                    Assert.IsTrue(provider.Count() == 3);
+                    Assert.AreEqual(expected: 3, actual: provider.Count());
                     Assert.IsTrue(data.ContainsKey(nameof(CompilationProperties.GIT_BRANCH)));
                     Assert.IsTrue(data[nameof(CompilationProperties.GIT_BRANCH)].Equals("?"));
                     Assert.IsTrue(data.ContainsKey(nameof(CompilationProperties.GIT_COMMIT)));

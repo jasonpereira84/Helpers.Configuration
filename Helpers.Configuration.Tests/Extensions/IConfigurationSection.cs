@@ -110,7 +110,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetObject<SomeClass>());
                     }
 
@@ -125,7 +125,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetObject<SomeClass>());
                     }
                 }
@@ -355,7 +355,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetObjects<SomeClass>());
                     }
 
@@ -371,7 +371,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetObjects<SomeClass>());
                     }
 
@@ -567,7 +567,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetValue<Int32>());
                     }
 
@@ -582,7 +582,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetValue<Int32>());
                     }
 
@@ -773,7 +773,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetValues<Int32>());
                     }
 
@@ -789,7 +789,7 @@ namespace JasonPereira84.Helpers.Configuration.Tests
                             .Build() as IConfiguration;
                         var configurationSection = configuration.GetSection("key");
 
-                        Assert.ThrowsException<InvalidOperationException>(
+                        Assert.Throws<InvalidOperationException>(
                             () => configurationSection.GetValues<Int32>());
                     }
 
